@@ -1,18 +1,18 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
-import JobsPage from "./pages/JobsPage";
-import JobDetailsPage from "./pages/JobDetailsPage";
-import AddJobPage from "./pages/AddJobPage";
-import ApplyJobPage from "./pages/ApplyJobPage";
-import MyApplicationsPage from "./pages/MyApplicationsPage";
-import MyJobsPage from "./pages/MyJobsPage";
-import ReviewApplicationsPage from "./pages/ReviewApplicationsPage";
-import UpdateJobPage from "./pages/UpdateJobPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import HomePage from "../pages/HomePage";
+import JobsPage from "../pages/MyJobsPage";
+import JobDetailsPage from "../pages/JobDetailsPage";
+import AddJobPage from "../pages/AddJobPage";
+import ApplyJobPage from "../pages/ApplyJobPage";
+import MyApplicationsPage from "../pages/MyApplicationsPage";
+import MyJobsPage from "../pages/MyJobsPage";
+import ReviewApplicationsPage from "../pages/ReviewApplicationsPage";
+import UpdateJobPage from "../pages/UpdateJobPage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
+import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import App from "../App.jsx";
 
 const router = createBrowserRouter([
@@ -25,7 +25,6 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "forgot-password", element: <ForgotPasswordPage /> },
       {
-        element: <ProtectedRoute />,
         children: [
           { path: "jobs", element: <JobsPage /> },
           { path: "jobs/details/:id", element: <JobDetailsPage /> },
@@ -41,3 +40,5 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+export default router;
