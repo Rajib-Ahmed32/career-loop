@@ -4,7 +4,7 @@ import DesktopNav from "../header/DesktopNav";
 import UserSection from "../header/UserSection";
 
 const user = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   name: "Rajib",
   photoURL: "https://i.pravatar.cc/300",
   role: "employer",
