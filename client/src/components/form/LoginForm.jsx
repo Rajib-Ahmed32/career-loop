@@ -5,6 +5,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Eye, EyeOff } from "lucide-react";
+import ErrorMessage from "../error_loading/ErrorMessage";
 
 const LoginForm = ({ onSuccess, onGoogleSignIn, onForgotPassword }) => {
   const {
@@ -38,9 +39,7 @@ const LoginForm = ({ onSuccess, onGoogleSignIn, onForgotPassword }) => {
             },
           })}
         />
-        {errors.email && (
-          <p className="text-sm text-red-500">{errors.email.message}</p>
-        )}
+        <ErrorMessage error={errors.email} />
       </div>
 
       <div>
@@ -70,9 +69,7 @@ const LoginForm = ({ onSuccess, onGoogleSignIn, onForgotPassword }) => {
             )}
           </button>
         </div>
-        {errors.password && (
-          <p className="text-sm text-red-500">{errors.password.message}</p>
-        )}
+        <ErrorMessage error={errors.password} />
       </div>
       <div className="text-right text-sm text-primary cursor-pointer mb-2">
         <p onClick={onForgotPassword} className="hover:underline">

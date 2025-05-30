@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ErrorMessage from "../error_loading/ErrorMessage";
 import { useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Eye, EyeOff } from "lucide-react";
 
-const RegisterForm = ({ onSuccess, onGoogleSignIn, onGoToLogin }) => {
+const RegisterForm = ({ onSuccess, onGoogleSignIn }) => {
   const {
     register,
     handleSubmit,
@@ -31,9 +32,7 @@ const RegisterForm = ({ onSuccess, onGoogleSignIn, onGoToLogin }) => {
           placeholder="Your full name"
           {...register("name", { required: "Name is required" })}
         />
-        {errors.name && (
-          <p className="text-sm text-red-500">{errors.name.message}</p>
-        )}
+        <ErrorMessage error={errors.name} />
       </div>
 
       <div>
@@ -59,9 +58,7 @@ const RegisterForm = ({ onSuccess, onGoogleSignIn, onGoToLogin }) => {
             },
           })}
         />
-        {errors.email && (
-          <p className="text-sm text-red-500">{errors.email.message}</p>
-        )}
+        <ErrorMessage error={errors.email} />
       </div>
 
       <div>
@@ -96,9 +93,7 @@ const RegisterForm = ({ onSuccess, onGoogleSignIn, onGoToLogin }) => {
             )}
           </button>
         </div>
-        {errors.password && (
-          <p className="text-sm text-red-500">{errors.password.message}</p>
-        )}
+        <ErrorMessage error={errors.password} />
       </div>
 
       <Button

@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/getErrorMessage";
 import RegisterForm from "../components/form/RegisterForm";
+import LoadingSpinner from "../components/error_loading/LoadingSpinner";
+import { registerUser } from "../services/authService";
+
 import {
   Card,
   CardContent,
@@ -8,8 +14,31 @@ import {
 } from "../components/ui/card";
 
 const RegisterPage = () => {
-  const handleSuccess = (data) => {
-    console.log("Form submitted successfully:", data);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleSuccess = async (formData) => {
+    setLoading(true);
+
+    try {
+      const data = await registerUser(formData);
+
+      document.cookie = `token=${data.token}; path=/; max-age=${
+        60 * 60 * 24 * 7
+      }; Secure; SameSite=Strict`;
+
+      toast.success("Registration successful!");
+      navigate("/");
+    } catch (error) {
+      const message = getErrorMessage(error);
+      toast.error(message);
+
+      if (import.meta.env.DEV) {
+        console.error("Registration failed:", error);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -21,7 +50,11 @@ const RegisterPage = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <RegisterForm onSuccess={handleSuccess} />
+          {loading ? (
+            <LoadingSpinner size="md" />
+          ) : (
+            <RegisterForm onSuccess={handleSuccess} />
+          )}
         </CardContent>
       </Card>
     </div>
